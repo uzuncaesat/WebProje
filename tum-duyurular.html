@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tüm Duyurular</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- Ana CSS dosyanız -->
+    <style>
+        /* Sayfa içi özel CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .duyuru-card {
+            background: white;
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .duyuru-title {
+            font-size: 1.5em;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .duyuru-description {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .duyuru-pdf {
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .duyuru-pdf a {
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .duyuru-pdf a:hover {
+            background-color: #45a049;
+        }
+
+        .back-btn {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            width: fit-content;
+        }
+
+        .back-btn:hover {
+            background-color: #555;
+        }
+
+        .sort-btn {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #008CBA;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            width: fit-content;
+        }
+
+        .sort-btn:hover {
+            background-color: #007B9E;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tüm Duyurular</h1>
+
+        <!-- Sıralama Butonu -->
+        <a href="#" class="sort-btn" id="sort-btn">Duyuruları En Yeniden En Eskiye Sırala</a>
+
+        <!-- Duyuru 1 -->
+        <div class="duyuru-card" data-order="1">
+            <div class="duyuru-title">Tablet Kalemi Kampanyası</div>
+            <div class="duyuru-description">
+                Tablet kalemlerinde özel indirimler başladı! Kampanya detaylarını inceleyin ve kaçırmayın.
+            </div>
+            <div class="duyuru-pdf">
+                <a href="indir/Belge 6.pdf" download>PDF'yi İndir</a>
+            </div>
+        </div>
+
+        <!-- Duyuru 2 -->
+        <div class="duyuru-card" data-order="2">
+            <div class="duyuru-title">Klavye ve Mouse Setleri</div>
+            <div class="duyuru-description">
+                Klavye ve mouse setlerinde %20 indirim fırsatı! Hemen incelemek için tıklayın.
+            </div>
+            <div class="duyuru-pdf">
+                <a href="indir/Belge 6 (1).pdf" download>PDF'yi İndir</a>
+            </div>
+        </div>
+
+        <!-- Duyuru 3 -->
+        <div class="duyuru-card" data-order="3">
+            <div class="duyuru-title">Şarj Aleti İndirimi</div>
+            <div class="duyuru-description">
+                Orijinal şarj aletlerinde kampanyalar başladı! Detayları hemen öğrenin.
+            </div>
+            <div class="duyuru-pdf">
+                <a href="indir/Belge 6 (2).pdf" download>PDF'yi İndir</a>
+            </div>
+        </div>
+
+        <!-- Duyuru 4 -->
+        <div class="duyuru-card" data-order="4">
+            <div class="duyuru-title">Yeni Ürünler Stokta!</div>
+            <div class="duyuru-description">
+                Mağazamıza yeni ürünler eklendi! En yeni aksesuarları hemen inceleyin.
+            </div>
+            <div class="duyuru-pdf">
+                <a href="indir/Belge 7.pdf" download>PDF'yi İndir</a>
+            </div>
+        </div>
+
+        <!-- Duyuru 5 -->
+        <div class="duyuru-card" data-order="5">
+            <div class="duyuru-title">Ücretsiz Kargo Kampanyası</div>
+            <div class="duyuru-description">
+                Tüm siparişlerde ücretsiz kargo fırsatı başladı! Kampanyadan hemen faydalanın.
+            </div>
+            <div class="duyuru-pdf">
+                <a href="indir/Belge 7 (1).pdf" download>PDF'yi İndir</a>
+            </div>
+        </div>
+
+        <!-- Geri Dön Butonu -->
+        <a href="index.html" class="back-btn">Ana Sayfaya Dön</a>
+    </div>
+
+    <script>
+        // Duyuruları sıralamak için fonksiyon
+        const sortBtn = document.getElementById('sort-btn');
+        const duyuruCards = document.querySelectorAll('.duyuru-card');
+
+        sortBtn.addEventListener('click', () => {
+            const sortedCards = Array.from(duyuruCards).sort((a, b) => {
+                const orderA = parseInt(a.getAttribute('data-order'));
+                const orderB = parseInt(b.getAttribute('data-order'));
+                return orderB - orderA; // En yeniyi en üste almak için
+            });
+
+            const container = document.querySelector('.container');
+            sortedCards.forEach(card => {
+                container.appendChild(card); // Kartları yeniden sıralıyoruz
+            });
+        });
+    </script>
+</body>
+</html>

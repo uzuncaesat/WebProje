@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknoloji Mağazası</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sol Menü -->
+        <div class="sidebar">
+            <h2>Admin Paneli</h2>
+            <ul>
+                <li><a href="#">Anasayfa</a></li>
+                <li><a href="#">Ürünler</a></li>
+                <li><a href="#">Kullanıcılar</a></li>
+                <li><a href="#">Siparişler</a></li>
+                <li><a href="#">Ayarlar</a></li>
+            </ul>
+        </div>
+        
+        <!-- İçerik Bölgesi -->
+        <div class="content">
+            <div class="header">
+                <h2>Ürün Yönetimi</h2>
+                <button class="add-button" onclick="openAddProductForm()">Yeni Ürün Ekle</button>
+            </div>
+            
+            <!-- Ürün Listesi -->
+            <div id="product-list">
+                <!-- Ürünlerin Dinamik Listesi Burada Görünecek -->
+            </div>
+
+            <!-- Satış ve Müşteri Memnuniyeti Grafikleri -->
+            <div class="sales-data">
+                <div class="container">
+                    <div class="row">
+                        <!-- Ürün Satış Grafiği -->
+                        <div class="col-md-6">
+                            <div class="titlepage">
+                                <p>Mağaza Performansı</p>
+                                <h2>Ürün Kategorisi Satış Grafiği</h2>
+                                <p>Mağazamızda en çok tercih edilen ürün kategorilerini inceleyin.</p>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="salesChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                        <!-- Müşteri Memnuniyeti Grafiği -->
+                        <div class="col-md-6">
+                            <div class="titlepage">
+                                <p>Müşteri Deneyimi</p>
+                                <h2>Müşteri Memnuniyeti Oranı</h2>
+                                <p>Mağazamızda gerçekleştirilen anket sonuçlarına göre müşteri memnuniyeti.</p>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="satisfactionChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Ürün Ekleme Formu -->
+    <div class="add-product-form" id="addProductForm">
+        <h3>Yeni Ürün Ekle</h3>
+        <form onsubmit="addProduct(event)">
+            <label for="productName">Ürün Adı:</label>
+            <input type="text" id="productName" required placeholder="Ürün adı girin">
+            
+            <label for="productPrice">Fiyat:</label>
+            <input type="number" id="productPrice" required placeholder="Fiyat girin">
+            
+            <label for="productStock">Stok Miktarı:</label>
+            <input type="number" id="productStock" required placeholder="Stok miktarını girin">
+            
+            <button type="submit">Ekle</button>
+            <button type="button" onclick="closeAddProductForm()">İptal</button>
+        </form>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Ürün Satış Grafiği
+        var ctx1 = document.getElementById('salesChart').getContext('2d');
+        var salesChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Logitech Crayon', 'Adonit Note+', 'Belkin BoostCharge', 'HyperX'],
+                datasets: [{
+                    label: 'Satış Miktarı',
+                    data: [300, 200, 150, 100],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                }
+            }
+        });
+
+        // Müşteri Memnuniyeti Grafiği
+        var ctx2 = document.getElementById('satisfactionChart').getContext('2d');
+        var satisfactionChart = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ['Çok Memnun', 'Memnun', 'Orta', 'Memnun Değil', 'Çok Memnun Değil'],
+                datasets: [{
+                    data: [50, 30, 10, 5, 5], // Örnek oranlar
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(153, 102, 255, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

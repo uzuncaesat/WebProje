@@ -1,0 +1,188 @@
+/* Genel ayarlar */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Admin Paneli Konteyner */
+.admin-container {
+    display: flex;
+}
+
+/* Sol Menü (Sidebar) */
+.sidebar {
+    background-color: #2c3e50;
+    color: white;
+    width: 250px;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 20px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #34495e;
+}
+
+/* İçerik Alanı */
+.content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.add-button {
+    background-color: #48ca95;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background-color: #27ae60;
+}
+
+/* Ürün Tablosu */
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-table th, .product-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.product-table th {
+    background-color: #34495e;
+    color: white;
+}
+
+.product-table td button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.product-table .edit-button {
+    background-color: #f39c12;
+}
+
+.product-table .edit-button:hover {
+    background-color: #e67e22;
+}
+
+.product-table .delete-button {
+    background-color: #e74c3c;
+}
+
+.product-table .delete-button:hover {
+    background-color: #c0392b;
+}
+
+/* Ürün Ekleme Formu */
+.add-product-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 400px;
+}
+
+.add-product-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.add-product-form button {
+    background-color: #48ca95;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.add-product-form button:hover {
+    background-color: #27ae60;
+}
+
+/* Resimler için genel ayar */
+img {
+    max-width: 100%; /* Resimlerin genişliği, konteynırının genişliğiyle orantılı olsun */
+    height: auto; /* Yükseklik oranı korunarak genişlik ayarlanacak */
+}
+
+/* Ekran boyutuna göre grafikler için özel stil */
+.product-list img, .sidebar img {
+    width: 15vw; /* Resimlerin genişliğini ekranın yüzde 15'i kadar ayarla */
+    height: auto; /* Yüksekliği oranla ayarlamak için */
+    object-fit: contain; /* Resmin tüm içeriğini sıkıştırmadan göstermek için */
+}
+
+/* Ürün Ekleme Formundaki Grafikler */
+.add-product-form img {
+    width: 20vw; /* Formdaki resimler biraz daha küçük olabilir */
+    height: auto;
+}
+
+/* Ürün Tablosundaki Grafikler */
+.product-table img {
+    width: 10vw; /* Ürün tablosundaki resimler daha küçük olmalı */
+    height: auto;
+    object-fit: cover; /* Resmin ortasından kesilerek ekrana oturması sağlanabilir */
+}
+
+/* Grafikler için özel düzenlemeler */
+.chart-container {
+    width: 100%;
+    max-width: 600px; /* Grafiklerin max genişliğini ayarla */
+    margin: 0 auto;
+}
+
+canvas {
+    width: 100% !important; /* Grafiklerin tam genişlikte görünmesini sağla */
+    height: auto !important; /* Grafiklerin oranını koruyarak yükseklik ayarını yap */
+}
+
+
+
